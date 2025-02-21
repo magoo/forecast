@@ -1,0 +1,11 @@
+---
+scenario: test-PERT
+
+end_date: 2099-11-05
+type: pert
+min: 1
+max: 10
+mode: 5
+---
+
+this is a test document

@@ -1,0 +1,11 @@
+---
+scenario: test-lognormal-closed
+
+end_date: 2024-11-05
+type: lognormal
+max: 10
+mode: 5
+outcome: 5
+---
+
+this is a test document

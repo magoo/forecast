@@ -1,0 +1,11 @@
+---
+scenario: test-interval
+
+end_date: 2025-11-05
+type: interval
+confidence: .95
+min: 1
+max: 10
+---
+
+this is a test document

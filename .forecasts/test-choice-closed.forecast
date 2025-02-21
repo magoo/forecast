@@ -1,0 +1,14 @@
+---
+scenario: test-choice-closed
+
+end_date: 2024-11-05
+type: choice
+options:
+    "Option a": 1
+    "Option b": 0
+    "Option c": 0
+    "Option d": 0
+outcome: "Option a"
+---
+
+this is a test document

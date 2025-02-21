@@ -1,0 +1,12 @@
+---
+scenario: test-binary-closed
+
+end_date: 2024-11-05
+type: choice
+options:
+    "correct": .5
+    "incorrect": .5
+outcome: "incorrect"
+---
+
+this is a test document

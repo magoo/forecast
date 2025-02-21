@@ -1,0 +1,13 @@
+---
+scenario: test-choice
+
+end_date: 2025-01-05
+type: choice
+options:
+    "Option a": 1
+    "Option b": 0
+    "Option c": 0
+    "Option d": 0
+---
+
+this is a test document

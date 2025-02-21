@@ -1,0 +1,18 @@
+---
+scenario: lognormal
+
+end_date: 2024-11-05
+type: lognormal
+max: 10
+mode: 5
+outcome: 5
+---
+
+This is a lognormal forecast that accepts a maximum belief (a 95% percentile) and a mode. For instance, forecasting how much money customers typically hold in their accounts: 
+
+Examples of when a lognormal forecast might be used:
+
+1. Estimating the time to complete a project where most tasks are expected to take a few days, but some could take significantly longer.
+2. Predicting the distribution of income in a population where most people earn a moderate amount, but a few individuals earn extremely high incomes.
+3. Forecasting the size of files uploaded to a server where most files are small, but occasionally very large files are uploaded.
+4. Modeling the spread of a viral video where most views occur within a short period, but some videos continue to gain views over a long time.

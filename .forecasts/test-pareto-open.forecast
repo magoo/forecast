@@ -1,0 +1,11 @@
+---
+scenario: test-pareto
+
+end_date: 2099-11-05
+type: pareto
+min: 1
+max: 10
+percentile: .95
+---
+
+this is a test document

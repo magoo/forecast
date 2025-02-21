@@ -1,0 +1,10 @@
+---
+scenario: test-lognormal
+
+end_date: 2024-12-20
+type: lognormal
+max: 10
+mode: 5
+---
+
+this is a test document

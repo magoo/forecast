@@ -1,0 +1,10 @@
+{
+  "site_package_search_strategy": "pep561",
+  "source_directories": [
+    "src/"
+  ],
+  "search_path": [
+    "./env/lib/python3.9/site-packages"
+  ],
+  "strict": true
+}

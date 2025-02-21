@@ -1,0 +1,23 @@
+---
+scenario: interval
+
+end_date: 2024-11-05
+type: interval
+confidence: .95
+min: 1
+max: 10
+outcome: 5
+---
+
+You choose an upper and lower boundary (min and max) and provide a confidence that the actual number will land equal to, or between, these numbers.
+
+This is an interval forecast, similar to the "Jelly Beans in a Jar" forecast. 
+
+More examples of situations where an interval forecast might be used include:
+
+1. Estimating the number of attendees at an event, such as a conference or concert.
+2. Predicting the range of sales for a new product launch.
+3. Forecasting the amount of rainfall in a specific region over a given period.
+4. Determining the range of possible stock prices for a company over the next quarter.
+5. Estimating the time it will take to complete a project or task.
+

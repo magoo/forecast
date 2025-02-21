@@ -1,0 +1,18 @@
+---
+scenario: choice-resolved
+
+end_date: 2025-01-05
+type: choice
+options:
+    "Chicago Bulls": .75
+    "New York Knicks": .20
+    "Detroit Pistons": .05
+    "Los Angeles Lakers": 0
+outcome: "Chicago Bulls"
+---
+
+This is a forecast about the NBA Championship, structured as a `choice` that accepts some options. 
+
+Because there is an `outcome` given in this file, a brier score  is displayed when you run forecast.
+
+The rest of the examples are resolved, now that you know the importance of the `outcome` in the parameter.

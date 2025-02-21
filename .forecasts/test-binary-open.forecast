@@ -1,0 +1,11 @@
+---
+scenario: test-binary
+end_date: 2099-11-05
+type: choice
+options:
+    "correct": .5
+    "incorrect": .5
+outcome: "correct"
+---
+
+this is a test document

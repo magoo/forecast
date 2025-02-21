@@ -1,0 +1,12 @@
+---
+scenario: test-PERT-closed
+
+end_date: 2024-11-05
+type: pert
+min: 1
+max: 10
+mode: 5
+outcome: 5
+---
+
+this is a test document
