@@ -1,5 +1,5 @@
 ---
-scenario: choice-resolved
+scenario: 2-README-choice-resolved
 
 end_date: 2020-01-05
 type: choice

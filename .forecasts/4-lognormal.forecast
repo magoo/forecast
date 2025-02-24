@@ -1,5 +1,5 @@
 ---
-scenario: lognormal
+scenario: 4-README-lognormal
 
 end_date: 2020-11-05
 type: lognormal

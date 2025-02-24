@@ -1,5 +1,5 @@
 ---
-scenario: test-pareto-closed
+scenario: 5-README-pareto-closed
 
 end_date: 2020-11-05
 type: pareto

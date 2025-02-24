@@ -1,5 +1,5 @@
 ---
-scenario: PERT
+scenario: 6-README-PERT
 
 end_date: 2020-11-05
 type: pert
