@@ -33,11 +33,19 @@ Install the dependencies
 pip install -r requirements.txt
 ```
 
-Install the package in development mode
+Install the package
 
 ```bash
-pip install -e .
+pip install .
 ```
+
+Then run the CLI
+
+```bash
+forecast
+```
+
+The first run will show you output with the pre-existing `.forecasts` directory. Take a look at the examples in that folder to get started.
 
 ## Usage
 
@@ -59,11 +67,6 @@ Show all forecasts by type:
 forecast --type <type>
 ```
 
-Show Statistics for a forecast:
-
-```bash
-forecast stats
-```
 
 ## Forecast Types
 
@@ -92,4 +95,4 @@ options:
 Some markdown text describing whether it will rain tomorrow.
 ```
 
-Examples are in the `/examples` directory.
+Examples are in the `.forecasts` directory in the repo.

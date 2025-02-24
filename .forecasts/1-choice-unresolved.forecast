@@ -1,14 +1,14 @@
 ---
-scenario: 1-README-choice-unresolved
+scenario: 1-README-choice-unresolved # This is the scenario name. It's used to identify the forecast in the CLI, and doesn't need to be so ugly like this example. 
 
 end_date: 2020-01-01
 type: choice
 options:
-    "Chicago Bulls": .75
+    "Chicago Bulls": .75        # These probabilities just need to add up to 1. 
     "New York Knicks": .20
     "Detroit Pistons": .05
     "Los Angeles Lakers": 0
-
+                                # There's no outcome given, so the forecast is unresolved.
 ---
 
 Hi! This file is the simplest example of a forecast. There are four types of forecasts:
@@ -28,5 +28,10 @@ This example is a forecast about the NBA Championship, structured as a `choice` 
 
 Because there is no `outcome` given in this file, the forecast is not scored yet. See the next example for a resolved forecast.
 
-forecast will tell you how many days are left until the end date (or if it's overdue) instead of a brier score.
+`forecast` will tell you how many days are left until the end date (or if it's overdue) instead of a brier score.
 
+Each line in the CLI output is preceded by an x, 0, or 1.
+
+- x means the forecast is unresolved.
+- 0 means the forecast is resolved and the outcome was incorrect.
+- 1 means the forecast is resolved and the outcome was correct.
