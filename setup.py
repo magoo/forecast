@@ -30,7 +30,7 @@ setup(
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "forecast=forecast:main",
+            "forecast=forecast.forecast:entrypoint",
         ],
     },
 )

@@ -1,0 +1,2 @@
+[console_scripts]
+forecast = forecast.forecast:entrypoint

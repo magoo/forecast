@@ -1,10 +1,10 @@
 from frontmatter import Post
-from models.interval import Interval
-from models.choice import Choice
-from models.pert import Pert
-from models.lognormal import LogNormal
-from models.forecast import Forecast
-from models.pareto import Pareto
+from .models.interval import Interval
+from .models.choice import Choice
+from .models.pert import Pert
+from .models.lognormal import LogNormal
+from .models.forecast import Forecast
+from .models.pareto import Pareto
 import click
 
 

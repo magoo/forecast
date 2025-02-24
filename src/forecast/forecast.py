@@ -5,10 +5,10 @@ import frontmatter
 from frontmatter import Post
 import os
 import sys
-import click  # Import the Click library
-from models.forecast import Forecast
+import click
+from .models.forecast import Forecast
 import datetime
-from util import load_answer
+from .util import load_answer
 
 
 @click.group(invoke_without_command=True)
@@ -172,6 +172,3 @@ def print_days_away(days: str) -> str:
     return f"closes in {days} days"
 
 
-# Program entrypoint
-if __name__ == "__main__":
-    entrypoint()

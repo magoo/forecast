@@ -1,3 +1,50 @@
+Metadata-Version: 2.2
+Name: forecast
+Version: 0.0.1
+Summary: A CLI tool for tracking and scoring forecasts
+Home-page: https://github.com/magoo/forecast
+Author: Ryan McGeehan
+Author-email: magoo@r10n.com
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Requires-Python: >=3.9
+Description-Content-Type: markdown
+License-File: LICENSE
+Requires-Dist: click==8.1.7
+Requires-Dist: dataclasses-json==0.5.7
+Requires-Dist: elicited==0.0.5
+Requires-Dist: libcst==1.5.1
+Requires-Dist: marshmallow==3.23.1
+Requires-Dist: marshmallow-enum==1.5.1
+Requires-Dist: mypy-extensions==1.0.0
+Requires-Dist: numpy==2.0.2
+Requires-Dist: packaging==24.2
+Requires-Dist: psutil==6.1.0
+Requires-Dist: Pygments==2.18.0
+Requires-Dist: pyre-extensions==0.0.32
+Requires-Dist: python-frontmatter==1.1.0
+Requires-Dist: PyYAML==6.0.2
+Requires-Dist: scipy==1.13.1
+Requires-Dist: tabulate==0.9.0
+Requires-Dist: TestSlide==2.7.1
+Requires-Dist: typeguard==2.13.3
+Requires-Dist: typing-inspect==0.9.0
+Requires-Dist: typing_extensions==4.12.2
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
 # forecast
 
 A command-line tool for tracking and scoring personal forecasts. Track your predictions over time and measure your forecasting accuracy using various probability distributions.

@@ -1,7 +1,7 @@
 from frontmatter import Post
 import click
 from typing import Dict
-from models.forecast import Forecast
+from .forecast import Forecast
 
 
 class Choice(Forecast):

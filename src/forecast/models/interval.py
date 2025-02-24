@@ -1,6 +1,9 @@
 from frontmatter import Post
 import click
-from models.forecast import Forecast
+from scipy.stats import beta
+import elicited as e
+from .forecast import Forecast
+from typing import Type
 
 
 class Interval(Forecast):

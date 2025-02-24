@@ -6,7 +6,7 @@ from scipy.stats import lognorm
 import elicited as e
 import numpy as np
 from typing import Type
-from models.forecast import Forecast
+from .forecast import Forecast
 
 
 class LogNormal(Forecast):
