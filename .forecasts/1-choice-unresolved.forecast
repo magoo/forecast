@@ -1,0 +1,32 @@
+---
+scenario: README-choice-unresolved
+
+end_date: 2025-01-05
+type: choice
+options:
+    "Chicago Bulls": .75
+    "New York Knicks": .20
+    "Detroit Pistons": .05
+    "Los Angeles Lakers": 0
+
+---
+
+Hi! This file is the simplest example of a forecast. There are four types of forecasts:
+
+1. `choice`: A forecast that accepts a set of options and a probability for each option.
+2. `interval`: A forecast that accepts a minimum and maximum value.
+3. `pert`: A forecast that accepts a minimum, maximum, and mode.
+4. `lognormal`: A forecast that accepts a mean and standard deviation.
+
+Until you add a `outcome`, the forecast is not scored.
+
+The above section is YAML frontmatter, which needs to be formatted strictly. This is inspired by Jekyll's "front matter" feature.
+
+Here, below the line, allows any kind of markdown. You can write the details about your forecasts here. 
+
+This example is a forecast about the NBA Championship, structured as a `choice` that accepts some options. 
+
+Because there is no `outcome` given in this file, the forecast is not scored yet. See the next example for a resolved forecast.
+
+forecast will tell you how many days are left until the end date (or if it's overdue) instead of a brier score.
+

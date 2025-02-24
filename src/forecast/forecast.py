@@ -45,7 +45,7 @@ def entrypoint(ctx, tag, type) -> None:  # pyre-ignore
             )
             click.echo("---------------------------------------------")
             click.secho(
-                "A tool for tracking and scoring forecasts with git",
+                "A tool for tracking and scoring forecasts with git. See examples in the `examples` directory.",
                 bold=True,
                 fg="green",
             )
