@@ -1,7 +1,7 @@
 ---
 scenario: test-overdue-closed
 
-end_date: 2020-01-01
+end_date: 2021-01-01
 type: interval
 confidence: .95
 min: 1

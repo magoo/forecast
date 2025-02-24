@@ -1,7 +1,7 @@
 ---
 scenario: choice-unresolved
 
-end_date: 2025-01-05
+end_date: 2020-01-05
 type: choice
 options:
     "Chicago Bulls": .75
