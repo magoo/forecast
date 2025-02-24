@@ -1,7 +1,7 @@
 ---
 scenario: 1-README-choice-unresolved
 
-end_date: 2020-01-05
+end_date: 2020-01-01
 type: choice
 options:
     "Chicago Bulls": .75
