@@ -42,7 +42,7 @@ class Forecast(ABC):
         except KeyError:
 
             raise ValueError("Error: The scenario metadata is incorrect. Please refer to an example file to troubleshoot. ")
-            
+            return
 
     #  if "outcome" in post.metadata:
     #     self.brier: float = self.calc()

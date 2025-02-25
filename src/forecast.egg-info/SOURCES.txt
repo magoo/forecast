@@ -3,7 +3,6 @@ README.md
 setup.py
 src/forecast/__init__.py
 src/forecast/forecast.py
-src/forecast/util.py
 src/forecast.egg-info/PKG-INFO
 src/forecast.egg-info/SOURCES.txt
 src/forecast.egg-info/dependency_links.txt

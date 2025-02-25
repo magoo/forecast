@@ -68,23 +68,25 @@ Activate the virtual environment
 source env/bin/activate
 ```
 
-Enter the src directory
-
-```bash
-cd src
-```
-
 Install the dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Install the package in development mode
+Install the package
 
 ```bash
-pip install -e .
+pip install .
 ```
+
+Then run the CLI
+
+```bash
+forecast
+```
+
+The first run will show you output with the pre-existing `.forecasts` directory. Take a look at the examples in that folder to get started.
 
 ## Usage
 
@@ -106,11 +108,6 @@ Show all forecasts by type:
 forecast --type <type>
 ```
 
-Show Statistics for a forecast:
-
-```bash
-forecast stats
-```
 
 ## Forecast Types
 
@@ -124,7 +121,7 @@ The tool supports several types of probabilistic forecasts:
 
 ## Creating Forecasts
 
-Create `.forecast` files in your `.forecasts` directory. They look a lot like [Frontmatter](https://jekyllrb.com/docs/frontmatter/) files, with specific keys for metadata. Example:
+Create `your_filename.forecast` files in your `.forecasts` directory. They look a lot like [Frontmatter](https://jekyllrb.com/docs/frontmatter/) files, with specific keys for metadata. Example:
 
 ```markdown
 ---
@@ -139,4 +136,4 @@ options:
 Some markdown text describing whether it will rain tomorrow.
 ```
 
-Examples are in the `/examples` directory.
+Examples are in the `.forecasts` directory in the repo.

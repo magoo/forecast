@@ -43,10 +43,9 @@ class Interval(Forecast):
             self.max: float = float(post.metadata["max"])
             self.confidence: float = float(post.metadata["confidence"])
         except KeyError:
-            click.echo(
+            raise ValueError(
                 "Error: The interval forecast requires a 'min', 'max', and 'confidence' metadata field."
             )
-            raise
 
         if "outcome" in post.metadata:
             self.outcome: float = post.metadata["outcome"]

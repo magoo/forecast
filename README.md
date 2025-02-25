@@ -21,12 +21,6 @@ Activate the virtual environment
 source env/bin/activate
 ```
 
-Enter the src directory
-
-```bash
-cd src
-```
-
 Install the dependencies
 
 ```bash
@@ -80,7 +74,7 @@ The tool supports several types of probabilistic forecasts:
 
 ## Creating Forecasts
 
-Create `.forecast` files in your `.forecasts` directory. They look a lot like [Frontmatter](https://jekyllrb.com/docs/frontmatter/) files, with specific keys for metadata. Example:
+Create `your_filename.forecast` files in your `.forecasts` directory. They look a lot like [Frontmatter](https://jekyllrb.com/docs/frontmatter/) files, with specific keys for metadata. Example:
 
 ```markdown
 ---

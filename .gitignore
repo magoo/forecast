@@ -2,3 +2,4 @@ __pycache__/
 env/
 .pyre
 .vscode
+src/forecast.egg-info
