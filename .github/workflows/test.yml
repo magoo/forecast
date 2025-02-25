@@ -22,4 +22,4 @@ jobs:
         pip install .
     - name: Run tests
       run: |
-        pytest --cov=forecast tests/ 
+        pytest tests/ 
