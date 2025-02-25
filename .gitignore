@@ -3,4 +3,4 @@ env/
 .pyre
 .vscode
 build/
-forecast.egg-info
+forecast.egg-info/
