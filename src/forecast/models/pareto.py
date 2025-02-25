@@ -1,6 +1,5 @@
 from frontmatter import Post
 from scipy.stats import pareto
-import click
 from .forecast import Forecast
 import elicited as e
 

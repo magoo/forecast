@@ -1,6 +1,5 @@
 # pyre-strict
 from frontmatter import Post
-import click
 import scipy
 from scipy.stats import lognorm
 import elicited as e

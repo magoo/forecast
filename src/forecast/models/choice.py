@@ -1,5 +1,4 @@
 from frontmatter import Post
-import click
 from typing import Dict
 from .forecast import Forecast
 

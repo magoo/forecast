@@ -1,6 +1,6 @@
 import unittest
 
-from models.Pareto import Pareto
+from forecast.models.pareto import Pareto
 
 from frontmatter import Post
 

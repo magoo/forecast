@@ -1,5 +1,4 @@
 from frontmatter import Post
-import click
 from abc import ABC, abstractmethod
 import datetime
 

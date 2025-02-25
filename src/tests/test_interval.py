@@ -1,5 +1,5 @@
 import unittest
-from models.interval import Interval
+from forecast.models.interval import Interval
 
 from frontmatter import Post
 

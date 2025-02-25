@@ -1,5 +1,5 @@
 import unittest
-from models.pert import Pert
+from forecast.models.pert import Pert
 from frontmatter import Post
 
 

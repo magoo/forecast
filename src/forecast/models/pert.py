@@ -1,5 +1,4 @@
 from frontmatter import Post
-import click
 from scipy.stats import beta
 import elicited as e
 from .forecast import Forecast

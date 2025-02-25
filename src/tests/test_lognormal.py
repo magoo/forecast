@@ -1,6 +1,6 @@
 import unittest
 
-from models.lognormal import LogNormal
+from forecast.models.lognormal import LogNormal
 
 from frontmatter import Post
 

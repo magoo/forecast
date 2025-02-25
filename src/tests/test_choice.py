@@ -1,5 +1,5 @@
 import unittest
-from models.choice import Choice
+from forecast.models.choice import Choice
 from frontmatter import Post
 
 
