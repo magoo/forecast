@@ -41,7 +41,7 @@ class Forecast(ABC):
             self.tags: list[str] = post.metadata.get("tags", [""])
         except KeyError:
 
-            raise ValueError("Error: The scenario metadata is incorrect. Please refer to an example file to troubleshoot. ")
+            raise KeyError("Error: The scenario metadata is incorrect. Please refer to an example file to troubleshoot. ")
             
 
     #  if "outcome" in post.metadata:

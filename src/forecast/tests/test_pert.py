@@ -8,6 +8,9 @@ class TestPert(unittest.TestCase):
     def test_with_valid_post(self) -> None:
         pert = Pert(
             Post(
+                scenario="A test scenario",
+                type="pert",
+                end_date="2025-01-01",
                 content="",
                 min=1,
                 max=100,
@@ -21,6 +24,9 @@ class TestPert(unittest.TestCase):
         with self.assertRaises(KeyError):
             Pert(
                 Post(
+                    scenario="A test scenario",
+                    type="pert",
+                    end_date="2025-01-01",
                     content="",
                     min=1,
                     mode=10,
@@ -43,6 +49,9 @@ class TestPert(unittest.TestCase):
         with self.assertRaises(ValueError):
             test = Pert(
                 Post(
+                    scenario="A test scenario",
+                    type="pert",
+                    end_date="2025-01-01",
                     content="",
                     min=1,
                     max=100,
@@ -54,6 +63,9 @@ class TestPert(unittest.TestCase):
     def test_calc_with_valid_outcome(self) -> None:
         pert = Pert(
             Post(
+                scenario="A test scenario",
+                type="pert",
+                end_date="2025-01-01",
                 content="",
                 min=1,
                 max=100,

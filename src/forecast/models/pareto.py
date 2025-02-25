@@ -42,7 +42,7 @@ class Pareto(Forecast):
             self.percentile: float = float(post.metadata["percentile"])
 
         except KeyError:
-            raise ValueError(
+            raise KeyError(
                 "Error: The pareto forecast requires a 'min', 'max', and 'percentile' field."
             )
 

@@ -46,7 +46,7 @@ class LogNormal(Forecast):
             self.max: float = post.metadata["max"]
 
         except KeyError:
-            raise ValueError(
+            raise KeyError(
                 "Error: The lognormal forecast requires a 'mode' and 'max' metadata field.",
             )
             

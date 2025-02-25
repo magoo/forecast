@@ -7,9 +7,12 @@ from frontmatter import Post
 
 class TestLogNormal(unittest.TestCase):
 
-    def test_with_valid_post(self) -> None:
+    def test_init_with_valid_post(self) -> None:
         lognormal = LogNormal(
             Post(
+                scenario="A test scenario",
+                type="lognormal",
+                end_date="2025-01-01",
                 content="",
                 max=100,
                 mode=10,
@@ -18,20 +21,26 @@ class TestLogNormal(unittest.TestCase):
         )
         self.assertAlmostEqual(lognormal.calc(), 1.895235588329737)
 
-    def test_without_max(self) -> None:
+    def test_init_without_max(self) -> None:
         with self.assertRaises(KeyError):
             LogNormal(
-                Post(
-                    content="",
-                    mode=10,
-                    outcome=15,
-                )
+            Post(
+                scenario="A test scenario",
+                type="lognormal",
+                end_date="2025-01-01",
+                content="",
+                mode=10,
+                outcome=15,
             )
+        )
 
-    def test_without_mode(self) -> None:
+    def test_init_without_mode(self) -> None:
         with self.assertRaises(KeyError):
             LogNormal(
                 Post(
+                    scenario="A test scenario",
+                    type="lognormal",
+                    end_date="2025-01-01",
                     content="",
                     max=10,
                     outcome=15,
@@ -42,8 +51,12 @@ class TestLogNormal(unittest.TestCase):
         with self.assertRaises(KeyError):
             test = LogNormal(
                 Post(
+                    scenario="A test scenario",
+                    type="lognormal",
+                    end_date="2025-01-01",
                     content="",
                     max=10,
+                    mode=10,
                 )
             )
             test.calc()
@@ -51,6 +64,9 @@ class TestLogNormal(unittest.TestCase):
     def test_calc_with_valid_outcome(self) -> None:
         lognormal = LogNormal(
             Post(
+                scenario="A test scenario",
+                type="lognormal",
+                end_date="2025-01-01",
                 content="",
                 max=100,
                 mode=10,
@@ -61,11 +77,15 @@ class TestLogNormal(unittest.TestCase):
 
     def test_calc_without_outcome(self) -> None:
         post_without_outcome = Post(
+            scenario="A test scenario",
+            type="lognormal",
+            end_date="2025-01-01",
             content="",
             max=100,
             mode=10,
         )
         lognormal = LogNormal(post_without_outcome)
+        
         with self.assertRaises(ValueError):
             lognormal.calc()
 

@@ -7,12 +7,27 @@ class TestChoice(unittest.TestCase):
 
     def setUp(self) -> None:
         self.post_with_outcome = Post(
+            scenario="A test scenario",
+            type="choice",
+            end_date="2025-01-01",
             content="",
             options={"option1": 0.7, "option2": 0.3},
             outcome="option1",
         )
         self.post_without_outcome = Post(
-            content="", options={"option1": 0.7, "option2": 0.3}
+            scenario="A test scenario",
+            type="choice",
+            end_date="2025-01-01",
+            content="",
+            options={"option1": 0.7, "option2": 0.3},
+        )
+        self.post_with_invalid_outcome = Post(
+            scenario="A test scenario",
+            type="choice",
+            end_date="2025-01-01",
+            content="",
+            options={"option1": 0.7, "option2": 0.3},
+            outcome="option3",
         )
         self.post_without_options = Post(content="")
 
@@ -36,12 +51,8 @@ class TestChoice(unittest.TestCase):
             choice.calc()
 
     def test_calc_with_invalid_outcome(self) -> None:
-        post_with_invalid_outcome = Post(
-            content="",
-            options=dict({"option1": 0.7, "option2": 0.3}),
-            outcome="option3",
-        )
-        choice = Choice(post_with_invalid_outcome)
+
+        choice = Choice(self.post_with_invalid_outcome)
         with self.assertRaises(ValueError):
             choice.calc()
 

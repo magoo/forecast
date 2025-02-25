@@ -34,7 +34,7 @@ class Choice(Forecast):
         try:
             self.options: Dict[str, float] = post.metadata["options"]
         except KeyError:
-            raise ValueError("Error: Options not provided in post metadata.")
+            raise KeyError("Error: Options not provided in post metadata.")
 
         if "outcome" in post.metadata:
             self.outcome: str = post.metadata["outcome"]

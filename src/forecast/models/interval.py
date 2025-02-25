@@ -43,7 +43,7 @@ class Interval(Forecast):
             self.max: float = float(post.metadata["max"])
             self.confidence: float = float(post.metadata["confidence"])
         except KeyError:
-            raise ValueError(
+            raise KeyError(
                 "Error: The interval forecast requires a 'min', 'max', and 'confidence' metadata field."
             )
 

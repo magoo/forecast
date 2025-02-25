@@ -44,7 +44,7 @@ class Pert(Forecast):
             self.mode: float = float(post.metadata["mode"])
             self.max: float = float(post.metadata["max"])
         except KeyError:
-            raise ValueError(
+            raise KeyError(
                 "Error: The pert forecast requires a 'min', 'mode', and 'max' metadata field."
             )
 
