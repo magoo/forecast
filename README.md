@@ -9,27 +9,11 @@ git clone https://github.com/yourusername/forecast.git
 cd forecast
 ```
 
-Create a virtual environment
+Create a virtual environment, activate it, and install the package
 
 ```bash
 python -m venv env
-```
-
-Activate the virtual environment
-
-```bash
 source env/bin/activate
-```
-
-Install the dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Install the package
-
-```bash
 pip install .
 ```
 
