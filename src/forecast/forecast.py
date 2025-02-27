@@ -82,8 +82,11 @@ def entrypoint(ctx, tag, type) -> None:  # pyre-ignore
         # Enumerate all .forecast files in the directory
 
         console = Console()
-        table = Table(show_header=True, header_style="bold magenta")
-        table = Table(title="Forecasts")
+        table = Table(
+            title="Forecasts",
+            show_header=True,
+            header_style="bold magenta"
+        )
 
         table.add_column("Status", justify="center", style="cyan", no_wrap=True)
         table.add_column("Days until close", justify="center", style="white")
@@ -123,12 +126,12 @@ def entrypoint(ctx, tag, type) -> None:  # pyre-ignore
 
             # If the forecast has an outcome, calculate the Brier score
             if hasattr(forecast, "outcome"):
-                brier_score = forecast.calc()
+                
                 table.add_row(
                     "[bold green]Closed[/bold green]",
                     "-",
                     forecast.scenario,
-                    f"[cyan]{brier_score:.4f}[/cyan]"
+                    f"[cyan]asdf[/cyan]"
                 )
 
             # If the forecast has an end date, calculate the days away
