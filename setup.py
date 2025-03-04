@@ -8,15 +8,15 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 
 setup(
     name="forecast",
-    version="0.0.1",
+    version="0.1",
     author="Ryan McGeehan",
     author_email="magoo@r10n.com",
     description="A CLI tool for tracking and scoring forecasts",
     long_description=long_description,
     long_description_content_type="markdown",
     url="https://github.com/magoo/forecast",
-    packages=find_packages(where="src"),
     package_dir={"": "src"},
+    packages=find_packages(where="src"),
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Console",
@@ -27,10 +27,18 @@ setup(
         "Topic :: Scientific/Engineering :: Mathematics",
     ],
     python_requires=">=3.9",
-    install_requires=requirements,
+    install_requires=[
+        "click",
+        "python-frontmatter",
+        "rich",
+    ],
     entry_points={
         "console_scripts": [
             "forecast=forecast.forecast:entrypoint",
         ],
+    },
+    include_package_data=True,
+    package_data={
+        "forecast": ["forecasts/*"],
     },
 )

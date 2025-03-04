@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 # pyre-strict
-
 import frontmatter
 from frontmatter import Post
 import os
 import sys
 import click
-from models.forecast import Forecast
-from models.interval import Interval
-from models.choice import Choice
-from models.pert import Pert
-from models.lognormal import LogNormal
-from models.pareto import Pareto
+from forecast.models.forecast import Forecast
+from forecast.models.interval import Interval
+from forecast.models.choice import Choice
+from forecast.models.pert import Pert
+from forecast.models.lognormal import LogNormal
+from forecast.models.pareto import Pareto
 from typing import Literal
 import datetime
 from rich.console import Console

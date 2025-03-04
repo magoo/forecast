@@ -1,7 +1,6 @@
 click==8.1.8
 dataclasses-json==0.5.7
 elicited==0.0.5
-frontmatter==3.0.8
 markdown-it-py==3.0.0
 marshmallow==3.23.1
 marshmallow-enum==1.5.1
