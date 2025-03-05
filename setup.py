@@ -27,11 +27,7 @@ setup(
         "Topic :: Scientific/Engineering :: Mathematics",
     ],
     python_requires=">=3.9",
-    install_requires=[
-        "click",
-        "python-frontmatter",
-        "rich",
-    ],
+    install_requires=requirements,
     entry_points={
         "console_scripts": [
             "forecast=forecast.forecast:entrypoint",
