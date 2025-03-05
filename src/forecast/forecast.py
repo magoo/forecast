@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 # pyre-strict
-
 import frontmatter
 from frontmatter import Post
 import os
 import sys
 import click
-from .models.forecast import Forecast
-from .models.interval import Interval
-from .models.choice import Choice
-from .models.pert import Pert
-from .models.lognormal import LogNormal
-from .models.pareto import Pareto
+from forecast.models.forecast import Forecast
+from forecast.models.interval import Interval
+from forecast.models.choice import Choice
+from forecast.models.pert import Pert
+from forecast.models.lognormal import LogNormal
+from forecast.models.pareto import Pareto
 from typing import Literal
 import datetime
+from rich.console import Console
+from rich.table import Table
 
 
 @click.group(invoke_without_command=True)
@@ -79,6 +80,18 @@ def entrypoint(ctx, tag, type) -> None:  # pyre-ignore
 
         # Enumerate all .forecast files in the directory
 
+        console = Console()
+        table = Table(
+            title="Forecasts",
+            show_header=True,
+            header_style="bold magenta"
+        )
+
+        table.add_column("Status", justify="center", style="cyan", no_wrap=True)
+        table.add_column("Days until close", justify="center", style="white")
+        table.add_column("Scenario", justify="center", style="white")
+        table.add_column("Brier Score", justify="center", style="white")
+
         for filename in os.listdir(forecast_dir):
             if filename.endswith(".forecast"):
                 filepath = os.path.join(forecast_dir, filename)
@@ -112,31 +125,37 @@ def entrypoint(ctx, tag, type) -> None:  # pyre-ignore
 
             # If the forecast has an outcome, calculate the Brier score
             if hasattr(forecast, "outcome"):
-                click.echo(
-                    print_columns(
-                        "0",
-                        forecast.scenario,
-                        forecast.calc(),
-                    )
+                
+                table.add_row(
+                    "[bold green]Closed[/bold green]",
+                    "-",
+                    forecast.scenario,
+                    f"[cyan]asdf[/cyan]"
                 )
+
             # If the forecast has an end date, calculate the days away
             elif hasattr(forecast, "end_date"):
                 days_away = (forecast.end_date - datetime.date.today()).days
 
                 if days_away < 0:
-                    click.echo(
-                        print_columns(
-                            "x", forecast.scenario, f"overdue by {abs(days_away)} days"
-                        )
+                    table.add_row(
+                        "[bold red]Overdue[/bold red]",
+                         f"[red]{days_away}[/red]",
+                        forecast.scenario,
+                        "-",
                     )
+
                 else:
-                    click.echo(
-                        print_columns(
-                            "_",
-                            forecast.scenario,
-                            print_days_away(days_away),
-                        )
+                    table.add_row(
+                        "[bold yellow]Open[/bold yellow]",
+                        f"[yellow]{days_away}[/yellow]",
+                        forecast.scenario,
+                        "-",
                     )
+
+        console = Console()
+        console.print(table)
+
     else:
         # Display help message if no subcommand is provided
         pass
@@ -168,13 +187,8 @@ entrypoint.add_command(help)
 #
 # entrypoint.add_command(stat)
 
-
-def print_columns(indicator: str, text: str, text2: str) -> str:
-    return "{: <1}: {: <30} {: <30}".format(indicator, text, text2)
-
-
 def print_days_away(days: str) -> str:
-    return f"closes in {days} days"
+    return f"{days} days"
 
 # Define valid forecast types as a Literal type
 ForecastType = Literal["interval", "choice", "pert", "lognormal", "pareto"]
@@ -196,3 +210,7 @@ def load_answer(post: Post) -> Forecast:
         return forecast_classes[post_type](post)
 
     raise ValueError(f"Invalid forecast type: {post_type}")
+
+
+if __name__ == "__main__":
+    entrypoint()
