@@ -20,6 +20,7 @@ class Forecast(ABC):
     Args:
         post (Post): A frontmatter Post object containing forecast metadata
     """
+
     @abstractmethod
     def calc(self) -> float:
         """Calculate the forecast score based on the outcome.

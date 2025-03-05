@@ -2,7 +2,7 @@
 from frontmatter import Post
 from scipy.stats import beta
 import elicited as e
-from .forecast import Forecast
+from forecast.models.forecast import Forecast
 from typing import Type
 
 

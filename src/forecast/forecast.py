@@ -6,11 +6,8 @@ import os
 import sys
 import click
 from forecast.models.forecast import Forecast
-from forecast.models.interval import Interval
-from forecast.models.choice import Choice
-from forecast.models.pert import Pert
-from forecast.models.lognormal import LogNormal
-from forecast.models.pareto import Pareto
+from forecast.factory import create_forecast
+
 from typing import Literal
 import datetime
 from rich.console import Console
@@ -96,7 +93,7 @@ def entrypoint(ctx, tag, type) -> None:  # pyre-ignore
                 filepath = os.path.join(forecast_dir, filename)
                 post: Post = frontmatter.load(filepath)
 
-                forecast: Forecast = load_answer(post)
+                forecast: Forecast = create_forecast(post)
 
                 # First, process types if the option is set
                 if type is None:
@@ -177,38 +174,11 @@ def help() -> None:
 
 entrypoint.add_command(help)
 
-
-# @click.command()
-# def stat() -> None:
-#     click.echo(
-#         "Average Brier Score, average brier score across tags, and calibration plot"
-#     )
-#
-# entrypoint.add_command(stat)
-
 def print_days_away(days: str) -> str:
     return f"{days} days"
 
 # Define valid forecast types as a Literal type
 ForecastType = Literal["interval", "choice", "pert", "lognormal", "pareto"]
-
-def load_answer(post: Post) -> Forecast:
-    # What type of answer are we given?
-    post_type: ForecastType = post.metadata["type"]  # This will type check the value
-
-    # Could also simplify with a dict lookup
-    forecast_classes = {
-        "interval": Interval,
-        "choice": Choice,
-        "pert": Pert,
-        "lognormal": LogNormal,
-        "pareto": Pareto,
-    }
-
-    if post_type in forecast_classes:
-        return forecast_classes[post_type](post)
-
-    raise ValueError(f"Invalid forecast type: {post_type}")
 
 
 if __name__ == "__main__":
