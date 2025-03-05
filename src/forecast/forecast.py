@@ -130,7 +130,7 @@ def entrypoint(ctx, tag, type) -> None:  # pyre-ignore
                     "[bold green]Closed[/bold green]",
                     "-",
                     forecast.scenario,
-                    f"[cyan]asdf[/cyan]"
+                    f"[cyan]{brier_score:.4f}[/cyan]"
                 )
 
             # If the forecast has an end date, calculate the days away
