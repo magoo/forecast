@@ -125,7 +125,7 @@ def entrypoint(ctx, tag, type) -> None:  # pyre-ignore
 
             # If the forecast has an outcome, calculate the Brier score
             if hasattr(forecast, "outcome"):
-                
+                brier_score = forecast.calc()
                 table.add_row(
                     "[bold green]Closed[/bold green]",
                     "-",
