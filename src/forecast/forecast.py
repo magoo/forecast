@@ -16,7 +16,6 @@ import datetime
 from rich.console import Console
 from rich.table import Table
 
-
 @click.group(invoke_without_command=True)
 @click.option("--tag", help="Tag to filter forecasts by.")
 @click.option(

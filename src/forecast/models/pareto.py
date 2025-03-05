@@ -1,3 +1,4 @@
+# pyre-strict
 from frontmatter import Post
 from scipy.stats import pareto
 from .forecast import Forecast

@@ -1,3 +1,4 @@
+# pyre-strict
 from frontmatter import Post
 from typing import Dict
 from .forecast import Forecast

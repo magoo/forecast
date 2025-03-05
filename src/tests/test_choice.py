@@ -42,7 +42,6 @@ class TestChoice(unittest.TestCase):
 
     def test_calc_with_valid_outcome(self) -> None:
         choice = Choice(self.post_with_outcome)
-        self.brier_score = lambda x, y: 0.18  # Mocking self.brier_score
         self.assertAlmostEqual(choice.calc(), 0.18)
 
     def test_calc_without_outcome(self) -> None:

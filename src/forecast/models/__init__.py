@@ -1,3 +1,4 @@
+# pyre-strict
 from .forecast import Forecast
 from .choice import Choice
 from .interval import Interval

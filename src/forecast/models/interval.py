@@ -1,3 +1,4 @@
+# pyre-strict
 from frontmatter import Post
 from scipy.stats import beta
 import elicited as e
