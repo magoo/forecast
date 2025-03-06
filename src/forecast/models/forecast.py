@@ -50,7 +50,7 @@ class Forecast(ABC):
 
 
 
-    def brier_score(self, outcome: list[float], forecast: list[float]) -> float:
+    def brier_score(self, outcomes: list[float], forecasts: list[float]) -> float:
         """Calculate the Brier score between actual outcomes and forecasted probabilities.
         
         The Brier score measures the accuracy of probabilistic predictions, where a lower
@@ -68,15 +68,15 @@ class Forecast(ABC):
             ValueError: If outcome and forecast lists have different lengths
         """
 
-        if len(outcome) != len(forecast):
+        if len(outcomes) != len(forecasts):
             raise ValueError(
                 "The outcome and forecast lists must be of the same length."
             )
 
         total_score = 0
 
-        for o, f in zip(outcome, forecast):
-            total_score += (o - f) ** 2
+        for outcome, forecast in zip(outcomes, forecasts):
+            total_score += (outcome - forecast) ** 2
 
         return total_score
 

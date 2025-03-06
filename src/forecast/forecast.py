@@ -8,7 +8,7 @@ import click
 from forecast.models.forecast import Forecast
 from forecast.factory import create_forecast
 
-from typing import Literal
+from typing import Literal, Optional, List
 import datetime
 from rich.console import Console
 from rich.table import Table
@@ -20,38 +20,14 @@ from rich.table import Table
     help="Type to filter forecasts by. (interval, choice, pert, lognormal, pareto)",
 )
 @click.pass_context
-def entrypoint(ctx, tag, type) -> None:  # pyre-ignore
+def entrypoint(ctx, type, tag) -> None:  # pyre-ignore
 
     if ctx.invoked_subcommand is None:  # We execute the default command
         forecast_dir = ".forecasts"
         forecasts = []
 
         if not os.path.exists(forecast_dir):
-            click.echo(
-                "███████╗ ██████╗ ██████╗ ███████╗ ██████╗ █████╗ ███████╗████████╗"
-            )
-            click.echo(
-                "██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔════╝██╔══██╗██╔════╝╚══██╔══╝"
-            )
-            click.echo(
-                "█████╗  ██║   ██║██████╔╝█████╗  ██║     ███████║███████╗   ██║   "
-            )
-            click.echo(
-                "██╔══╝  ██║   ██║██╔══██╗██╔══╝  ██║     ██╔══██║╚════██║   ██║   "
-            )
-            click.echo(
-                "██║     ╚██████╔╝██║  ██║███████╗╚██████╗██║  ██║███████║   ██║   "
-            )
-            click.echo(
-                "╚═╝      ╚═════╝ ╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚══════╝   ╚═╝   "
-            )
-            click.echo("---------------------------------------------")
-            click.secho(
-                "A tool for tracking and scoring forecasts with git. See examples in the `.forecasts` directory.",
-                bold=True,
-                fg="green",
-            )
-            click.echo("---------------------------------------------")
+            display_welcome_banner()
 
             make_dir = click.confirm(
                 "Create the directory '.forecast'?",
@@ -88,26 +64,8 @@ def entrypoint(ctx, tag, type) -> None:  # pyre-ignore
         table.add_column("Scenario", justify="center", style="white")
         table.add_column("Brier Score", justify="center", style="white")
 
-        for filename in os.listdir(forecast_dir):
-            if filename.endswith(".forecast"):
-                filepath = os.path.join(forecast_dir, filename)
-                post: Post = frontmatter.load(filepath)
 
-                forecast: Forecast = create_forecast(post)
-
-                # First, process types if the option is set
-                if type is None:
-                    pass
-                elif type == forecast.type:
-                    pass
-                else:
-                    continue
-
-                # Process tags if the option is set
-                if tag is None:
-                    forecasts.append(forecast)
-                elif tag in forecast.tags:
-                    forecasts.append(forecast)
+        forecasts = process_forecast_files(forecast_dir, type, tag)
 
         if not forecasts:
             click.echo("No forecast files found in the '.forecast' directory.")
@@ -180,6 +138,43 @@ def print_days_away(days: str) -> str:
 # Define valid forecast types as a Literal type
 ForecastType = Literal["interval", "choice", "pert", "lognormal", "pareto"]
 
+def display_welcome_banner() -> None:
+    click.secho(
+        "FORECAST",
+        bold=True,
+        fg="green",
+    )
+    click.echo("---------------------------------------------")
+    click.secho(
+        "A tool for tracking and scoring forecasts with git. See examples in the `.forecasts` directory.",
+        bold=True,
+        fg="green",
+    )
+    click.echo("---------------------------------------------")
+
+def process_forecast_files(forecast_dir: str, type: Optional[str], tag: Optional[str]) -> List[Forecast]:
+    forecasts = []
+    for filename in os.listdir(forecast_dir):
+        if filename.endswith(".forecast"):
+            filepath = os.path.join(forecast_dir, filename)
+            post: Post = frontmatter.load(filepath)
+
+            forecast: Forecast = create_forecast(post)
+
+            # First, process types if the option is set
+            if type is None:
+                pass
+            elif type == forecast.type:
+                pass
+            else:
+                continue
+
+            # Process tags if the option is set
+            if tag is None:
+                forecasts.append(forecast)
+            elif tag in forecast.tags:
+                forecasts.append(forecast)
+    return forecasts
 
 if __name__ == "__main__":
     entrypoint()
