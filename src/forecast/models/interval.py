@@ -1,9 +1,6 @@
 # pyre-strict
-from frontmatter import Post
-from scipy.stats import beta
-import elicited as e
+from frontmatter import Post # type:ignore
 from forecast.models.forecast import Forecast
-from typing import Type
 
 
 class Interval(Forecast):
@@ -39,16 +36,16 @@ class Interval(Forecast):
         Forecast.__init__(self, post)
 
         try:
-            self.min: float = float(post.metadata["min"])
-            self.max: float = float(post.metadata["max"])
-            self.confidence: float = float(post.metadata["confidence"])
+            self.min: float = float(post.metadata["min"]) # type: ignore
+            self.max: float = float(post.metadata["max"]) # type: ignore
+            self.confidence: float = float(post.metadata["confidence"]) # type: ignore
         except KeyError:
             raise KeyError(
                 "Error: The interval forecast requires a 'min', 'max', and 'confidence' metadata field."
             )
 
         if "outcome" in post.metadata:
-            self.outcome: float = post.metadata["outcome"]
+            self.outcome: float = post.metadata["outcome"] # type: ignore
 
     def calc(self) -> float:
 

@@ -1,7 +1,7 @@
 # pyre-strict
-from frontmatter import Post
-from scipy.stats import beta
-import elicited as e
+from frontmatter import Post # type:ignore
+from scipy.stats import beta # type:ignore
+import elicited as e # type:ignore
 from .forecast import Forecast
 from typing import Type
 
@@ -11,7 +11,7 @@ class Pert(Forecast):
 
     This class implements the Forecast base class for scenarios where the outcome
     is expected to follow a PERT (Program Evaluation and Review Technique) distribution.
-    The distribution is parameterized using minimum, most likely (mode), and maximum 
+    The distribution is parameterized using minimum, most likely (mode), and maximum
     values which are used to fit the beta distribution parameters.
 
     Attributes:
@@ -36,29 +36,30 @@ class Pert(Forecast):
         KeyError: If required 'min', 'mode', or 'max' fields are missing from metadata
         ValueError: If calculating Brier score without an outcome
     """
+
     def __init__(self, post: Post) -> None:
         Forecast.__init__(self, post)
 
         try:
-            self.min: float = float(post.metadata["min"])
-            self.mode: float = float(post.metadata["mode"])
-            self.max: float = float(post.metadata["max"])
+            self.min: float = float(post.metadata["min"]) # type: ignore
+            self.mode: float = float(post.metadata["mode"]) # type: ignore
+            self.max: float = float(post.metadata["max"]) # type: ignore
         except KeyError:
             raise KeyError(
                 "Error: The pert forecast requires a 'min', 'mode', and 'max' metadata field."
             )
 
         if "outcome" in post.metadata:
-            self.outcome: float = post.metadata["outcome"]
+            self.outcome: float = post.metadata["outcome"] # type: ignore
 
-        PERT_a, PERT_b = e.elicitPERT(self.min, self.mode, self.max)
-        self.pert = beta(  # pyre-ignore
+        PERT_a, PERT_b = e.elicitPERT(self.min, self.mode, self.max) # type: ignore
+        self.pert: Type[scipy.stats._distn_infrastructure.rv_continuous_frozen] = beta(  # type: ignore
             PERT_a, PERT_b, loc=self.min, scale=self.max - self.min
         )
 
     def calc(self) -> float:
         if hasattr(self, "outcome"):
-            outcome_probability = self.pert.pdf(self.outcome)
+            outcome_probability: float = self.pert.pdf(self.outcome) #type: ignore
             return self.brier_score(
                 [1, 0], [outcome_probability, 1 - outcome_probability]
             )

@@ -1,7 +1,7 @@
 import unittest
 from forecast.models.interval import Interval
 
-from frontmatter import Post
+from frontmatter import Post # type:ignore
 
 
 class TestInterval(unittest.TestCase):

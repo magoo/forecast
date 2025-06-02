@@ -2,7 +2,7 @@ import unittest
 
 from forecast.models.pareto import Pareto
 
-from frontmatter import Post
+from frontmatter import Post # type:ignore
 
 
 class TestPareto(unittest.TestCase):

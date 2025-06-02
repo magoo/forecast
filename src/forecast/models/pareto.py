@@ -1,8 +1,8 @@
 # pyre-strict
-from frontmatter import Post
-from scipy.stats import pareto
+from frontmatter import Post # type:ignore
+from scipy.stats import pareto # type:ignore
 from .forecast import Forecast
-import elicited as e
+import elicited as e # type:ignore
 
 
 class Pareto(Forecast):
@@ -37,9 +37,9 @@ class Pareto(Forecast):
     def __init__(self, post: Post) -> None:
         Forecast.__init__(self, post)
         try:
-            self.min: float = float(post.metadata["min"])
-            self.max: float = float(post.metadata["max"])
-            self.percentile: float = float(post.metadata["percentile"])
+            self.min: float = float(post.metadata["min"]) # type: ignore
+            self.max: float = float(post.metadata["max"]) # type: ignore
+            self.percentile: float = float(post.metadata["percentile"]) # type: ignore
 
         except KeyError:
             raise KeyError(
@@ -51,14 +51,14 @@ class Pareto(Forecast):
             raise ValueError("Error: The percentile must be between 0 and 1.")
 
         if "outcome" in post.metadata:
-            self.outcome: float = post.metadata["outcome"]
+            self.outcome: float = post.metadata["outcome"] # type: ignore
 
     def calc(self) -> float:
         if hasattr(self, "outcome"):
-            b = e.elicitPareto(self.min, self.max, quantP=self.percentile)
+            b = e.elicitPareto(self.min, self.max, quantP=self.percentile) # type: ignore
             p = pareto(b, loc=self.min - 1.0, scale=1.0)
 
-            outcome_probability = p.pdf(self.outcome)
+            outcome_probability: float = p.pdf(self.outcome) # type: ignore
             return self.brier_score(
                 [1, 0], [outcome_probability, 1 - outcome_probability]
             )

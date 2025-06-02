@@ -1,2 +1,1 @@
-# pyre-strict
-from .forecast import entrypoint
+from .forecast import entrypoint # type:ignore

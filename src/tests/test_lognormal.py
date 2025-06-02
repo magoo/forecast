@@ -2,7 +2,7 @@ import unittest
 
 from forecast.models.lognormal import LogNormal
 
-from frontmatter import Post
+from frontmatter import Post # type:ignore
 
 
 class TestLogNormal(unittest.TestCase):

@@ -1,6 +1,6 @@
 import unittest
 from forecast.models.pert import Pert
-from frontmatter import Post
+from frontmatter import Post # type:ignore
 
 
 class TestPert(unittest.TestCase):

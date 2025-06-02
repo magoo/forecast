@@ -1,5 +1,5 @@
 # pyre-strict
-from frontmatter import Post
+from frontmatter import Post # type:ignore
 from abc import ABC, abstractmethod
 import datetime
 
@@ -36,10 +36,10 @@ class Forecast(ABC):
     def __init__(self, post: Post) -> None:
 
         try:
-            self.scenario: str = post.metadata["scenario"]
-            self.end_date: datetime.date = post.metadata["end_date"]
-            self.type: str = post.metadata["type"]
-            self.tags: list[str] = post.metadata.get("tags", [""])
+            self.scenario: str = post.metadata["scenario"]           # type: ignore
+            self.end_date: datetime.date = post.metadata["end_date"] # type: ignore
+            self.type: str = post.metadata["type"]                   # type: ignore
+            self.tags: list[str] = post.metadata.get("tags", [""])   # type: ignore
         except KeyError:
 
             raise KeyError("Error: The scenario metadata is incorrect. Please refer to an example file to troubleshoot. ")

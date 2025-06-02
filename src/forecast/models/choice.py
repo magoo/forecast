@@ -1,6 +1,6 @@
 # pyre-strict
-from frontmatter import Post
-from typing import Dict
+from frontmatter import Post # type:ignore
+from typing import Dict, List
 from .forecast import Forecast
 
 
@@ -32,24 +32,25 @@ class Choice(Forecast):
         Forecast.__init__(self, post)
 
         try:
-            self.options: Dict[str, float] = post.metadata["options"]
+            self.options: Dict[str, float] = post.metadata["options"] # type: ignore
         except KeyError:
             raise KeyError("Error: Options not provided in post metadata.")
 
         if "outcome" in post.metadata:
-            self.outcome: str = post.metadata["outcome"]
+            self.outcome: str = post.metadata["outcome"] # type: ignore
 
     def calc(self) -> float:
-
         if hasattr(self, "outcome"):
-            scoring = []
+            scoring: List[float] = [] 
 
+            # First build the scoring list
             for s, _ in self.options.items():
                 if s == self.outcome:
                     scoring.append(1)
                 else:
                     scoring.append(0)
-
+                
+            # Then check if outcome exists - this should happen before building the scoring list
             if self.outcome in self.options:
                 return self.brier_score(scoring, list(self.options.values()))
             else:

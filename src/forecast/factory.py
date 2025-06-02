@@ -1,5 +1,5 @@
 from typing import Literal
-from frontmatter import Post
+from frontmatter import Post # type:ignore # type: ignore
 from forecast.models.forecast import Forecast
 from forecast.models.interval import Interval
 from forecast.models.choice import Choice

@@ -1,6 +1,6 @@
 import unittest
 from forecast.models.choice import Choice
-from frontmatter import Post
+from frontmatter import Post # type:ignore
 
 
 class TestChoice(unittest.TestCase):

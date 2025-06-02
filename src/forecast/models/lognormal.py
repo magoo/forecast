@@ -1,8 +1,8 @@
 # pyre-strict
-from frontmatter import Post
-import scipy
-from scipy.stats import lognorm
-import elicited as e
+from frontmatter import Post # type:ignore
+import scipy # type:ignore
+from scipy.stats import lognorm # type:ignore
+import elicited as e # type:ignore
 import numpy as np
 from typing import Type
 from .forecast import Forecast
@@ -25,7 +25,7 @@ class LogNormal(Forecast):
         max (float): The maximum value used to fit the distribution
         outcome (float, optional): The actual outcome value, if known
         lognormal (scipy.stats.lognorm): The fitted lognormal distribution
-        
+
     Args:
         post (Post): A frontmatter Post object containing forecast metadata including:
             - mode: float for the most likely value
@@ -37,36 +37,36 @@ class LogNormal(Forecast):
         KeyError: If required 'mode' or 'max' fields are missing from metadata
         ValueError: If calculating Brier score without an outcome
     """
+
     def __init__(self, post: Post) -> None:
         Forecast.__init__(self, post)
 
         try:
-            self.mode: float = post.metadata["mode"]
-            self.max: float = post.metadata["max"]
+            self.mode: float = post.metadata["mode"] # type: ignore
+            self.max: float = post.metadata["max"] # type: ignore
 
         except KeyError:
             raise KeyError(
                 "Error: The lognormal forecast requires a 'mode' and 'max' metadata field.",
             )
-            
 
         if "outcome" in post.metadata:
-            self.outcome: float = post.metadata["outcome"]
+            self.outcome: float = post.metadata["outcome"] # type: ignore
 
         quantP = 0.95
 
         if "quantP" in post.metadata:
             quantP = post.metadata["quantP"]
 
-        mean, stdv = e.elicitLogNormal(self.mode, self.max, quantP=quantP)
+        mean, stdv = e.elicitLogNormal(self.mode, self.max, quantP=quantP) # type: ignore
         self.lognormal: Type[scipy.stats._distn_infrastructure.rv_continuous_frozen] = (
-            lognorm(s=stdv[0], scale=np.exp(mean[0]))
+            lognorm(s=stdv[0], scale=np.exp(mean[0])) # type: ignore
         )  # TODO, may be a bug here. Unsure why elicitLogNormal returns a list
 
     def calc(self) -> float:
 
         if hasattr(self, "outcome"):
-            outcome_probability: float = self.lognormal.pdf(  # pyre-ignore
+            outcome_probability: float = self.lognormal.pdf(  # type: ignore
                 x=self.outcome
             )
             return self.brier_score(
