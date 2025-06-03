@@ -58,7 +58,7 @@ class Pareto(Forecast):
             # from scipy.stats import pareto # type:ignore
             # p = pareto(b, loc=self.min - 1.0, scale=1.0)
 
-            import src.forecast.models.math.pareto as p
+            import forecast.models.math.pareto as p
 
             pareto = p.Pareto(self.min, self.max, self.percentile)
 

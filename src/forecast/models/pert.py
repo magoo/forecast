@@ -63,7 +63,7 @@ class Pert(Forecast):
             #     PERT_a, PERT_b, loc=self.min, scale=self.max - self.min
             # )
 
-            import src.forecast.models.math.PERT as p
+            import forecast.models.math.PERT as p
 
             pert = p.PERT(self.min, self.mode, self.max)
 

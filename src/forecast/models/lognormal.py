@@ -75,7 +75,7 @@ class LogNormal(Forecast):
             #    x=self.outcome
             #)
 
-            import src.forecast.models.math.lognormal as ln
+            import forecast.models.math.lognormal as ln
 
             lognormal = ln.LogNormal(self.mode, self.max)
 
