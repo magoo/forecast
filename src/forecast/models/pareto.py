@@ -1,6 +1,5 @@
 # pyre-strict
 from frontmatter import Post # type:ignore
-from scipy.stats import pareto # type:ignore
 from .forecast import Forecast
 import elicited as e # type:ignore
 
@@ -55,10 +54,15 @@ class Pareto(Forecast):
 
     def calc(self) -> float:
         if hasattr(self, "outcome"):
-            b = e.elicitPareto(self.min, self.max, quantP=self.percentile) # type: ignore
-            p = pareto(b, loc=self.min - 1.0, scale=1.0)
+            # b = e.elicitPareto(self.min, self.max, quantP=self.percentile) # type: ignore
+            # from scipy.stats import pareto # type:ignore
+            # p = pareto(b, loc=self.min - 1.0, scale=1.0)
 
-            outcome_probability: float = p.pdf(self.outcome) # type: ignore
+            import src.forecast.models.math.pareto as p
+
+            pareto = p.Pareto(self.min, self.max, self.percentile)
+
+            outcome_probability: float = pareto.pdf(self.outcome) # type: ignore
             return self.brier_score(
                 [1, 0], [outcome_probability, 1 - outcome_probability]
             )

@@ -1,10 +1,9 @@
 # pyre-strict
 from frontmatter import Post # type:ignore
-import scipy # type:ignore
-from scipy.stats import lognorm # type:ignore
+
 import elicited as e # type:ignore
-import numpy as np
-from typing import Type
+#import numpy as np
+#from typing import Type
 from .forecast import Forecast
 
 
@@ -53,22 +52,35 @@ class LogNormal(Forecast):
         if "outcome" in post.metadata:
             self.outcome: float = post.metadata["outcome"] # type: ignore
 
-        quantP = 0.95
+            if "quantP" in post.metadata:
+                self.quantP = post.metadata["quantP"]
+            else:
+                self.quantP = 0.95
 
-        if "quantP" in post.metadata:
-            quantP = post.metadata["quantP"]
-
-        mean, stdv = e.elicitLogNormal(self.mode, self.max, quantP=quantP) # type: ignore
-        self.lognormal: Type[scipy.stats._distn_infrastructure.rv_continuous_frozen] = (
-            lognorm(s=stdv[0], scale=np.exp(mean[0])) # type: ignore
-        )  # TODO, may be a bug here. Unsure why elicitLogNormal returns a list
 
     def calc(self) -> float:
 
         if hasattr(self, "outcome"):
-            outcome_probability: float = self.lognormal.pdf(  # type: ignore
-                x=self.outcome
-            )
+
+
+            #import scipy # type:ignore
+            #from scipy.stats import lognorm # type:ignore
+#
+            #mean, stdv = e.elicitLogNormal(self.mode, self.max, quantP=self.quantP) # type: ignore
+            #self.lognormal: Type[scipy.stats._distn_infrastructure.rv_continuous_frozen] = (
+            #    lognorm(s=stdv[0], scale=np.exp(mean[0])) # type: ignore
+            #)  # TODO, may be a bug here. Unsure why elicitLogNormal returns a list
+#
+            #outcome_probability: float = self.lognormal.pdf(  # type: ignore
+            #    x=self.outcome
+            #)
+
+            import src.forecast.models.math.lognormal as ln
+
+            lognormal = ln.LogNormal(self.mode, self.max)
+
+            outcome_probability: float = lognormal.pdf(self.outcome)
+
             return self.brier_score(
                 [1, 0], [outcome_probability, 1 - outcome_probability]
             )

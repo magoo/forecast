@@ -1,9 +1,8 @@
 # pyre-strict
 from frontmatter import Post # type:ignore
-from scipy.stats import beta # type:ignore
 import elicited as e # type:ignore
 from .forecast import Forecast
-from typing import Type
+#from typing import Type
 
 
 class Pert(Forecast):
@@ -52,14 +51,23 @@ class Pert(Forecast):
         if "outcome" in post.metadata:
             self.outcome: float = post.metadata["outcome"] # type: ignore
 
-        PERT_a, PERT_b = e.elicitPERT(self.min, self.mode, self.max) # type: ignore
-        self.pert: Type[scipy.stats._distn_infrastructure.rv_continuous_frozen] = beta(  # type: ignore
-            PERT_a, PERT_b, loc=self.min, scale=self.max - self.min
-        )
+
+
+
 
     def calc(self) -> float:
         if hasattr(self, "outcome"):
-            outcome_probability: float = self.pert.pdf(self.outcome) #type: ignore
+            # from scipy.stats import beta # type:ignore
+            # PERT_a, PERT_b = e.elicitPERT(self.min, self.mode, self.max) # type: ignore
+            # self.pert: Type[scipy.stats._distn_infrastructure.rv_continuous_frozen] = beta(  # type: ignore
+            #     PERT_a, PERT_b, loc=self.min, scale=self.max - self.min
+            # )
+
+            import src.forecast.models.math.PERT as p
+
+            pert = p.PERT(self.min, self.mode, self.max)
+
+            outcome_probability: float = pert.pdf(self.outcome) # type: ignore
             return self.brier_score(
                 [1, 0], [outcome_probability, 1 - outcome_probability]
             )
