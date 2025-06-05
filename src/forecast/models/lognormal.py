@@ -1,7 +1,7 @@
 # pyre-strict
 from frontmatter import Post # type:ignore
 
-import elicited as e # type:ignore
+# import elicited as e # type:ignore
 #import numpy as np
 #from typing import Type
 from .forecast import Forecast

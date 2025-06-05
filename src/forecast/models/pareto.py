@@ -1,7 +1,7 @@
 # pyre-strict
 from frontmatter import Post # type:ignore
 from .forecast import Forecast
-import elicited as e # type:ignore
+# import elicited as e # type:ignore
 
 
 class Pareto(Forecast):

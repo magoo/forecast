@@ -1,8 +1,8 @@
 # pyre-strict
 from frontmatter import Post # type:ignore
-import elicited as e # type:ignore
 from .forecast import Forecast
 #from typing import Type
+#import elicited as e # type:ignore
 
 
 class Pert(Forecast):
