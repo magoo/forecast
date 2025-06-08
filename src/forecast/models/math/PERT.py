@@ -1,4 +1,5 @@
 import math
+from typing import Optional
 
 class PERT:
     def __init__(self, xmin: float, mode: float, xmax: float):
@@ -25,7 +26,7 @@ class PERT:
 
     def _beta_cdf(self, x: float) -> float:
         # Approximate Beta CDF using continued fraction for regularized incomplete beta function
-        # We’ll use a simple numerical integration fallback here
+        # We'll use a simple numerical integration fallback here
         steps = 100
         total = 0
         dx = x / steps
@@ -69,3 +70,14 @@ class PERT:
             else:
                 high = mid
         return (low + high) / 2
+
+    def pdf_to_probability(self, x: float, epsilon: Optional[float] = None) -> float:
+        """
+        Converts the PDF at x to a probability by integrating over [x-epsilon, x+epsilon].
+        If epsilon is not provided, use 1% of the range.
+        """
+        if epsilon is None:
+            epsilon = 0.01 * self.range
+        a = max(self.xmin, x - epsilon)
+        b = min(self.xmax, x + epsilon)
+        return self.cdf(b) - self.cdf(a)

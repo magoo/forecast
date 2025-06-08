@@ -1,4 +1,5 @@
 import math
+from typing import Optional
 
 class Pareto:
     def __init__(self, xmin: float, xmax: float, percentile: float):
@@ -38,3 +39,14 @@ class Pareto:
         if self.alpha <= 2:
             return float('inf')
         return (self.xmin**2 * self.alpha) / ((self.alpha - 1)**2 * (self.alpha - 2))
+
+    def pdf_to_probability(self, x: float, epsilon: Optional[float] = None) -> float:
+        """
+        Converts the PDF at x to a probability by integrating over [x-epsilon, x+epsilon].
+        If epsilon is not provided, use 1% of xmin as a default scale.
+        """
+        if epsilon is None:
+            epsilon = 0.01 * self.xmin
+        a = max(self.xmin, x - epsilon)
+        b = x + epsilon
+        return self.cdf(b) - self.cdf(a)

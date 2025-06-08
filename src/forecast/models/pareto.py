@@ -54,15 +54,9 @@ class Pareto(Forecast):
 
     def calc(self) -> float:
         if hasattr(self, "outcome"):
-            # b = e.elicitPareto(self.min, self.max, quantP=self.percentile) # type: ignore
-            # from scipy.stats import pareto # type:ignore
-            # p = pareto(b, loc=self.min - 1.0, scale=1.0)
-
             import forecast.models.math.pareto as p
-
             pareto = p.Pareto(self.min, self.max, self.percentile)
-
-            outcome_probability: float = pareto.pdf(self.outcome) # type: ignore
+            outcome_probability: float = pareto.pdf_to_probability(self.outcome)
             return self.brier_score(
                 [1, 0], [outcome_probability, 1 - outcome_probability]
             )

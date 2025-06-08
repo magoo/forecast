@@ -1,4 +1,5 @@
 import math
+from typing import Optional
 
 class LogNormal:
     def __init__(self, mode: float, max_95: float):
@@ -66,3 +67,14 @@ class LogNormal:
     @staticmethod
     def _sqrt2_inv() -> float:
         return 1 / math.sqrt(2)
+
+    def pdf_to_probability(self, x: float, epsilon: Optional[float] = None) -> float:
+        """
+        Converts the PDF at x to a probability by integrating over [x-epsilon, x+epsilon].
+        If epsilon is not provided, use 1% of the mode as a default scale.
+        """
+        if epsilon is None:
+            epsilon = 0.01 * self.mode
+        a = max(0, x - epsilon)
+        b = x + epsilon
+        return self.cdf(b) - self.cdf(a)

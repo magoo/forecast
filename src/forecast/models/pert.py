@@ -57,17 +57,9 @@ class Pert(Forecast):
 
     def calc(self) -> float:
         if hasattr(self, "outcome"):
-            # from scipy.stats import beta # type:ignore
-            # PERT_a, PERT_b = e.elicitPERT(self.min, self.mode, self.max) # type: ignore
-            # self.pert: Type[scipy.stats._distn_infrastructure.rv_continuous_frozen] = beta(  # type: ignore
-            #     PERT_a, PERT_b, loc=self.min, scale=self.max - self.min
-            # )
-
             import forecast.models.math.PERT as p
-
             pert = p.PERT(self.min, self.mode, self.max)
-
-            outcome_probability: float = pert.pdf(self.outcome) # type: ignore
+            outcome_probability: float = pert.pdf_to_probability(self.outcome)
             return self.brier_score(
                 [1, 0], [outcome_probability, 1 - outcome_probability]
             )

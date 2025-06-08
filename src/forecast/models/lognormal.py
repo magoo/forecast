@@ -59,28 +59,10 @@ class LogNormal(Forecast):
 
 
     def calc(self) -> float:
-
         if hasattr(self, "outcome"):
-
-
-            #import scipy # type:ignore
-            #from scipy.stats import lognorm # type:ignore
-#
-            #mean, stdv = e.elicitLogNormal(self.mode, self.max, quantP=self.quantP) # type: ignore
-            #self.lognormal: Type[scipy.stats._distn_infrastructure.rv_continuous_frozen] = (
-            #    lognorm(s=stdv[0], scale=np.exp(mean[0])) # type: ignore
-            #)  # TODO, may be a bug here. Unsure why elicitLogNormal returns a list
-#
-            #outcome_probability: float = self.lognormal.pdf(  # type: ignore
-            #    x=self.outcome
-            #)
-
             import forecast.models.math.lognormal as ln
-
             lognormal = ln.LogNormal(self.mode, self.max)
-
-            outcome_probability: float = lognormal.pdf(self.outcome)
-
+            outcome_probability: float = lognormal.pdf_to_probability(self.outcome)
             return self.brier_score(
                 [1, 0], [outcome_probability, 1 - outcome_probability]
             )
