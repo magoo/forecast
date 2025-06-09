@@ -23,7 +23,7 @@ class LogNormal(Forecast):
         mode (float): The most likely value (mode) of the distribution
         max (float): The maximum value used to fit the distribution
         outcome (float, optional): The actual outcome value, if known
-        lognormal (scipy.stats.lognorm): The fitted lognormal distribution
+        lognormal: The fitted lognormal distribution
 
     Args:
         post (Post): A frontmatter Post object containing forecast metadata including:
@@ -37,31 +37,27 @@ class LogNormal(Forecast):
         ValueError: If calculating Brier score without an outcome
     """
 
-    def __init__(self, post: Post) -> None:
-        Forecast.__init__(self, post)
+    def __init__(self, post: Post) -> None: # type: ignore
+        Forecast.__init__(self, post) # type: ignore
 
         try:
-            self.mode: float = post.metadata["mode"] # type: ignore
-            self.max: float = post.metadata["max"] # type: ignore
+            self.p5: float = post.metadata["p5"] # type: ignore
+            self.p50: float = post.metadata["p50"] # type: ignore
+            self.p95: float = post.metadata["p95"] # type: ignore
 
         except KeyError:
             raise KeyError(
-                "Error: The lognormal forecast requires a 'mode' and 'max' metadata field.",
+                "Error: The lognormal forecast requires a 'p5', 'p50', and 'p95' metadata field.",
             )
 
-        if "outcome" in post.metadata:
+        if "outcome" in post.metadata: # type: ignore
             self.outcome: float = post.metadata["outcome"] # type: ignore
-
-            if "quantP" in post.metadata:
-                self.quantP = post.metadata["quantP"]
-            else:
-                self.quantP = 0.95
 
 
     def calc(self) -> float:
         if hasattr(self, "outcome"):
             import forecast.models.math.lognormal as ln
-            lognormal = ln.LogNormal(self.mode, self.max)
+            lognormal = ln.LogNormal(self.p5, self.p50, self.p95)
             outcome_probability: float = lognormal.pdf_to_probability(self.outcome)
             return self.brier_score(
                 [1, 0], [outcome_probability, 1 - outcome_probability]

@@ -3,8 +3,9 @@ scenario: test-lognormal-closed
 
 end_date: 2024-11-05
 type: lognormal
-max: 10
-mode: 5
+p5: 1
+p50: 50
+p95: 100
 outcome: 5
 ---
 

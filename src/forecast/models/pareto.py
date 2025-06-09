@@ -33,29 +33,24 @@ class Pareto(Forecast):
         KeyError: If required 'min', 'max', or 'percentile' fields are missing from metadata
         ValueError: If percentile is not between 0 and 1 or if calculating Brier score without an outcome
     """
-    def __init__(self, post: Post) -> None:
-        Forecast.__init__(self, post)
+    def __init__(self, post: Post) -> None:# type: ignore
+        Forecast.__init__(self, post)# type: ignore
         try:
-            self.min: float = float(post.metadata["min"]) # type: ignore
-            self.max: float = float(post.metadata["max"]) # type: ignore
-            self.percentile: float = float(post.metadata["percentile"]) # type: ignore
+            self.p90: float = float(post.metadata["p90"]) # type: ignore
+            self.p99: float = float(post.metadata["p99"]) # type: ignore
 
         except KeyError:
             raise KeyError(
-                "Error: The pareto forecast requires a 'min', 'max', and 'percentile' field."
+                "Error: The pareto forecast requires a 'p90' and 'p99' field."
             )
 
-        if self.percentile < 0 or self.percentile > 1:
-            
-            raise ValueError("Error: The percentile must be between 0 and 1.")
-
-        if "outcome" in post.metadata:
+        if "outcome" in post.metadata: # type: ignore
             self.outcome: float = post.metadata["outcome"] # type: ignore
 
     def calc(self) -> float:
         if hasattr(self, "outcome"):
             import forecast.models.math.pareto as p
-            pareto = p.Pareto(self.min, self.max, self.percentile)
+            pareto = p.Pareto(self.p90, self.p99)
             outcome_probability: float = pareto.pdf_to_probability(self.outcome)
             return self.brier_score(
                 [1, 0], [outcome_probability, 1 - outcome_probability]

@@ -1,6 +1,7 @@
 # pyre-strict
 from frontmatter import Post # type:ignore
 from .forecast import Forecast
+
 #from typing import Type
 #import elicited as e # type:ignore
 
@@ -22,7 +23,6 @@ class Pert(Forecast):
         mode (float): The most likely value (mode) of the distribution
         max (float): The maximum value of the distribution
         outcome (float, optional): The actual outcome value, if known
-        pert (scipy.stats.beta): The fitted beta distribution with PERT parameters
 
     Args:
         post (Post): A frontmatter Post object containing forecast metadata including:
@@ -36,8 +36,8 @@ class Pert(Forecast):
         ValueError: If calculating Brier score without an outcome
     """
 
-    def __init__(self, post: Post) -> None:
-        Forecast.__init__(self, post)
+    def __init__(self, post: Post) -> None: # type: ignore
+        Forecast.__init__(self, post) 
 
         try:
             self.min: float = float(post.metadata["min"]) # type: ignore
@@ -48,7 +48,7 @@ class Pert(Forecast):
                 "Error: The pert forecast requires a 'min', 'mode', and 'max' metadata field."
             )
 
-        if "outcome" in post.metadata:
+        if "outcome" in post.metadata: # type: ignore
             self.outcome: float = post.metadata["outcome"] # type: ignore
 
 

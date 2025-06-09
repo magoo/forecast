@@ -8,7 +8,7 @@ import click
 from forecast.models.forecast import Forecast
 from forecast.factory import create_forecast
 
-from typing import Literal, Optional, List
+from typing import Optional, List
 import datetime
 from rich.console import Console
 from rich.table import Table
@@ -63,9 +63,7 @@ def print_days_away(days: str) -> str:
     return f"{days} days"
 
 
-# Define valid forecast types as a Literal type
-ForecastType = Literal["interval", "choice", "pert", "lognormal", "pareto"]
-
+# Define valid forecast types as a Literal typ
 
 def display_welcome_banner() -> None:
     click.secho(

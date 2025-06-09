@@ -2,18 +2,27 @@ import math
 from typing import Optional
 
 class Pareto:
-    def __init__(self, xmin: float, xmax: float, percentile: float):
-        if not (0 < percentile < 1):
-            raise ValueError("Percentile must be between 0 and 1")
-        if xmin <= 0 or xmax <= xmin:
-            raise ValueError("xmin must be > 0 and xmax must be > xmin")
+    def __init__(self, p90: float, p99: float):
 
-        self.xmin = xmin
-        self.xmax = xmax
-        self.percentile = percentile
+        if p90 <= 0 or p99 <= p90:
+            raise ValueError("Percentiles must be positive and p99 must be > p90")
 
-        # Derive alpha from the CDF inversion
-        self.alpha = math.log(1 - percentile) / math.log(xmin / xmax)
+        self.p90 = p90
+        self.p99 = p99
+        q90 = .90
+        q99 = .99
+
+        # Solve for alpha using two quantiles and the Pareto inverse CDF formula:
+        # x = xmin / (1 - p)^(1/alpha)
+        # log(p99/p90) = (1/alpha) * log((1 - q90)/(1 - q99))
+
+        log_ratio_x = math.log(p99 / p90)
+        log_ratio_q = math.log((1 - q90) / (1 - q99))
+
+        self.alpha = log_ratio_q / log_ratio_x
+
+        # Backsolve for xmin using one of the quantiles
+        self.xmin = p90 * (1 - q90)**(1 / self.alpha)
 
     def pdf(self, x: float) -> float:
         if x < self.xmin:
@@ -45,8 +54,7 @@ class Pareto:
         Converts the PDF at x to a probability by integrating over [x-epsilon, x+epsilon].
         If epsilon is not provided, use 1% of xmin as a default scale.
         """
-        if epsilon is None:
-            epsilon = 0.01 * self.xmin
-        a = max(self.xmin, x - epsilon)
-        b = x + epsilon
+        eps = epsilon if epsilon is not None else 0.01 * self.xmin
+        a = max(self.xmin, x - eps)
+        b = x + eps
         return self.cdf(b) - self.cdf(a)

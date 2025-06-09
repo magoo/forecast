@@ -33,7 +33,7 @@ class Forecast(ABC):
         """
         pass
 
-    def __init__(self, post: Post) -> None:
+    def __init__(self, post: Post) -> None: # type: ignore
 
         try:
             self.scenario: str = post.metadata["scenario"]           # type: ignore
