@@ -140,7 +140,7 @@ def first_run(forecast_dir: str) -> None:
 
 def display_forecasts(forecasts: List[Forecast]) -> None:
     console = Console()
-    table = Table(title="Forecasts", show_header=True, header_style="bold magenta")
+    table = Table(title="Forecasts", show_header=True, header_style="bold white")
 
     table.add_column("Status", justify="center", style="cyan", no_wrap=True)
     table.add_column("Days until close", justify="center", style="white")

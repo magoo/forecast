@@ -5,6 +5,7 @@ from .forecast import Forecast
 #from typing import Type
 #import elicited as e # type:ignore
 
+# Note: The Post type from frontmatter is untyped; type checking is suppressed with # type: ignore
 
 class Pert(Forecast):
     """A forecast model for PERT distributed predictions.
@@ -25,11 +26,12 @@ class Pert(Forecast):
         outcome (float, optional): The actual outcome value, if known
 
     Args:
-        post (Post): A frontmatter Post object containing forecast metadata including:
+        post: A frontmatter Post object containing forecast metadata including:
             - min: float for the minimum value
             - mode: float for the most likely value
             - max: float for the maximum value
             - outcome: float (optional) the actual outcome if known
+        Note: The Post type is untyped; type checking is suppressed.
 
     Raises:
         KeyError: If required 'min', 'mode', or 'max' fields are missing from metadata
@@ -37,6 +39,7 @@ class Pert(Forecast):
     """
 
     def __init__(self, post: Post) -> None: # type: ignore
+        # Accepts a frontmatter.Post object; type checking is suppressed due to lack of type hints in frontmatter
         Forecast.__init__(self, post) 
 
         try:
@@ -50,10 +53,6 @@ class Pert(Forecast):
 
         if "outcome" in post.metadata: # type: ignore
             self.outcome: float = post.metadata["outcome"] # type: ignore
-
-
-
-
 
     def calc(self) -> float:
         if hasattr(self, "outcome"):

@@ -12,28 +12,28 @@ class LogNormal(Forecast):
 
     This class implements the Forecast base class for scenarios where the outcome
     is expected to follow a lognormal distribution. The distribution is parameterized
-    using a mode (most likely value) and a maximum value, which are used to fit
-    the lognormal parameters.
+    using three quantiles: p5, p50, and p95, which are used to fit the lognormal parameters.
 
     Attributes:
         scenario (str): Inherited from Forecast, the scenario being forecasted
         end_date (datetime.date): Inherited from Forecast, the end date of the forecast
         type (str): Inherited from Forecast, the type of forecast
         tags (list[str]): Inherited from Forecast, list of tags for the forecast
-        mode (float): The most likely value (mode) of the distribution
-        max (float): The maximum value used to fit the distribution
+        p5 (float): The 5th percentile value of the distribution
+        p50 (float): The 50th percentile (median) value of the distribution
+        p95 (float): The 95th percentile value of the distribution
         outcome (float, optional): The actual outcome value, if known
-        lognormal: The fitted lognormal distribution
 
     Args:
-        post (Post): A frontmatter Post object containing forecast metadata including:
-            - mode: float for the most likely value
-            - max: float for the maximum value
-            - quantP: float (optional) the probability quantile for fitting (default 0.95)
+        post: A frontmatter Post object containing forecast metadata including:
+            - p5: float for the 5th percentile value
+            - p50: float for the 50th percentile (median) value
+            - p95: float for the 95th percentile value
             - outcome: float (optional) the actual outcome if known
+        Note: The Post type is untyped; type checking is suppressed.
 
     Raises:
-        KeyError: If required 'mode' or 'max' fields are missing from metadata
+        KeyError: If required 'p5', 'p50', or 'p95' fields are missing from metadata
         ValueError: If calculating Brier score without an outcome
     """
 

@@ -9,29 +9,27 @@ class Pareto(Forecast):
 
     This class implements the Forecast base class for scenarios where the outcome
     is expected to follow a Pareto distribution. The distribution is parameterized
-    using a minimum value, maximum value, and a percentile value which are used to
-    fit the Pareto parameter.
+    using two quantiles: p90 and p99, which are used to fit the Pareto parameters.
 
     Attributes:
         scenario (str): Inherited from Forecast, the scenario being forecasted
         end_date (datetime.date): Inherited from Forecast, the end date of the forecast
         type (str): Inherited from Forecast, the type of forecast
         tags (list[str]): Inherited from Forecast, list of tags for the forecast
-        min (float): The minimum value of the distribution
-        max (float): The maximum value used to fit the distribution
-        percentile (float): The probability percentile for fitting (between 0 and 1)
+        p90 (float): The 90th percentile value of the distribution
+        p99 (float): The 99th percentile value of the distribution
         outcome (float, optional): The actual outcome value, if known
 
     Args:
-        post (Post): A frontmatter Post object containing forecast metadata including:
-            - min: float for the minimum value
-            - max: float for the maximum value
-            - percentile: float for the probability percentile (between 0 and 1)
+        post: A frontmatter Post object containing forecast metadata including:
+            - p90: float for the 90th percentile value
+            - p99: float for the 99th percentile value
             - outcome: float (optional) the actual outcome if known
+        Note: The Post type is untyped; type checking is suppressed.
 
     Raises:
-        KeyError: If required 'min', 'max', or 'percentile' fields are missing from metadata
-        ValueError: If percentile is not between 0 and 1 or if calculating Brier score without an outcome
+        KeyError: If required 'p90' or 'p99' fields are missing from metadata
+        ValueError: If calculating Brier score without an outcome
     """
     def __init__(self, post: Post) -> None:# type: ignore
         Forecast.__init__(self, post)# type: ignore
