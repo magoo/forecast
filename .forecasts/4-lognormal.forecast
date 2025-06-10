@@ -3,8 +3,9 @@ scenario: 4-README-lognormal
 
 end_date: 2020-11-04
 type: lognormal
-max: 10
-mode: 5
+p5: 1
+p50: 50
+p95: 100
 outcome: 5
 ---
 

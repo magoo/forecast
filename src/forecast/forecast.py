@@ -8,11 +8,10 @@ import click
 from forecast.models.forecast import Forecast
 from forecast.factory import create_forecast
 
-from typing import Literal, Optional, List
+from typing import Optional, List
 import datetime
 from rich.console import Console
 from rich.table import Table
-
 
 @click.group(invoke_without_command=True)
 @click.option("--tag", help="Tag to filter forecasts by.")
@@ -64,9 +63,7 @@ def print_days_away(days: str) -> str:
     return f"{days} days"
 
 
-# Define valid forecast types as a Literal type
-ForecastType = Literal["interval", "choice", "pert", "lognormal", "pareto"]
-
+# Define valid forecast types as a Literal typ
 
 def display_welcome_banner() -> None:
     click.secho(
@@ -143,7 +140,7 @@ def first_run(forecast_dir: str) -> None:
 
 def display_forecasts(forecasts: List[Forecast]) -> None:
     console = Console()
-    table = Table(title="Forecasts", show_header=True, header_style="bold magenta")
+    table = Table(title="Forecasts", show_header=True, header_style="bold white")
 
     table.add_column("Status", justify="center", style="cyan", no_wrap=True)
     table.add_column("Days until close", justify="center", style="white")

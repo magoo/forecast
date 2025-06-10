@@ -3,9 +3,8 @@ scenario: 5-README-pareto-closed
 
 end_date: 2020-11-05
 type: pareto
-min: 1
-max: 10
-percentile: .95
+p90: 100
+p99: 1000
 outcome: 5
 ---
 

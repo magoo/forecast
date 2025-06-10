@@ -33,7 +33,7 @@ class Forecast(ABC):
         """
         pass
 
-    def __init__(self, post: Post) -> None:
+    def __init__(self, post: Post) -> None: # type: ignore
 
         try:
             self.scenario: str = post.metadata["scenario"]           # type: ignore
@@ -62,7 +62,7 @@ class Forecast(ABC):
             forecast: List of forecasted probabilities, between 0 and 1
         
         Returns:
-            float: The Brier score
+            float: The Brier score (sum of squared errors, as used by GJ Open)
 
         Raises:
             ValueError: If outcome and forecast lists have different lengths
