@@ -1,4 +1,4 @@
-from frontmatter import Post # type:ignore # type: ignore
+from frontmatter import Post  # type:ignore # type: ignore
 from forecast.models.forecast import Forecast
 from forecast.models.interval import Interval
 from forecast.models.choice import Choice
@@ -17,8 +17,8 @@ def create_forecast(post: Post) -> Forecast:
         "lognormal": LogNormal,
         "pareto": Pareto,
     }
-    
+
     if forecast_type in forecast_classes:
         return forecast_classes[forecast_type](post)
-        
+
     raise ValueError(f"Invalid forecast type: {forecast_type}")

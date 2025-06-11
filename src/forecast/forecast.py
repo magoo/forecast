@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # pyre-strict
 import frontmatter  # type: ignore
-from frontmatter import Post # type:ignore  # type: ignore
+from frontmatter import Post  # type:ignore  # type: ignore
 import os
 import sys
 import click
@@ -12,6 +12,7 @@ from typing import Optional, List
 import datetime
 from rich.console import Console
 from rich.table import Table
+
 
 @click.group(invoke_without_command=True)
 @click.option("--tag", help="Tag to filter forecasts by.")
@@ -65,6 +66,7 @@ def print_days_away(days: str) -> str:
 
 # Define valid forecast types as a Literal typ
 
+
 def display_welcome_banner() -> None:
     click.secho(
         "FORECAST",
@@ -88,9 +90,11 @@ def process_forecast_files(
         if filename.endswith(".forecast"):
             filepath = os.path.join(forecast_dir, filename)
             post: Post = frontmatter.load(filepath)
-
-            forecast: Forecast = create_forecast(post)
-
+            try:
+                forecast: Forecast = create_forecast(post)
+            except Exception as e:
+                click.echo(f"[ERROR] Failed to load forecast from '{filename}': {e}")
+                continue
             # First, process types if the option is set
             if type is None:
                 pass
@@ -98,17 +102,14 @@ def process_forecast_files(
                 pass
             else:
                 continue
-
             # Process tags if the option is set
             if tag is None:
                 forecasts.append(forecast)
             elif tag in forecast.tags:
                 forecasts.append(forecast)
-
     if not forecasts:
         click.echo("No forecast files found in the '.forecast' directory.")
         sys.exit(0)
-
     return forecasts
 
 

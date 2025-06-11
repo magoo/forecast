@@ -1,6 +1,7 @@
 # pyre-strict
-from frontmatter import Post # type:ignore
+from frontmatter import Post  # type:ignore
 from .forecast import Forecast
+
 # import elicited as e # type:ignore
 
 
@@ -31,23 +32,28 @@ class Pareto(Forecast):
         KeyError: If required 'p90' or 'p99' fields are missing from metadata
         ValueError: If calculating Brier score without an outcome
     """
-    def __init__(self, post: Post) -> None:# type: ignore
-        Forecast.__init__(self, post)# type: ignore
-        try:
-            self.p90: float = float(post.metadata["p90"]) # type: ignore
-            self.p99: float = float(post.metadata["p99"]) # type: ignore
 
+    def __init__(self, post: Post) -> None:  # type: ignore
+        Forecast.__init__(self, post)  # type: ignore
+        try:
+            try:
+                self.p90: float = float(post.metadata["p90"])  # type: ignore
+                self.p99: float = float(post.metadata["p99"])  # type: ignore
+            except (ValueError, TypeError) as e:
+                raise ValueError(
+                    f"Pareto forecast: p90 and p99 must be numbers. Got: p90={post.metadata.get('p90')}, p99={post.metadata.get('p99')}"
+                ) from e
         except KeyError:
             raise KeyError(
                 "Error: The pareto forecast requires a 'p90' and 'p99' field."
             )
-
-        if "outcome" in post.metadata: # type: ignore
-            self.outcome: float = post.metadata["outcome"] # type: ignore
+        if "outcome" in post.metadata:  # type: ignore
+            self.outcome: float = post.metadata["outcome"]  # type: ignore
 
     def calc(self) -> float:
         if hasattr(self, "outcome"):
             import forecast.models.math.pareto as p
+
             pareto = p.Pareto(self.p90, self.p99)
             outcome_probability: float = pareto.pdf_to_probability(self.outcome)
             return self.brier_score(

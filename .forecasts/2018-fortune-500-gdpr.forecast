@@ -1,0 +1,13 @@
+---
+scenario: A Fortune 500 company is assessed a large fine for a violation of GDPR between November 15, 2018, and April 15, 2019.
+
+end_date: 2019-04-15
+type: choice
+options:
+    "Yes": .4708
+    "No": .5292
+outcome: "Yes"
+---
+
+
+https://magoo.github.io/risk-measurement/forecasts/

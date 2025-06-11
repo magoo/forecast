@@ -1,9 +1,9 @@
 # pyre-strict
-from frontmatter import Post # type:ignore
+from frontmatter import Post  # type:ignore
 
 # import elicited as e # type:ignore
-#import numpy as np
-#from typing import Type
+# import numpy as np
+# from typing import Type
 from .forecast import Forecast
 
 
@@ -37,26 +37,28 @@ class LogNormal(Forecast):
         ValueError: If calculating Brier score without an outcome
     """
 
-    def __init__(self, post: Post) -> None: # type: ignore
-        Forecast.__init__(self, post) # type: ignore
-
+    def __init__(self, post: Post) -> None:  # type: ignore
+        Forecast.__init__(self, post)  # type: ignore
         try:
-            self.p5: float = post.metadata["p5"] # type: ignore
-            self.p50: float = post.metadata["p50"] # type: ignore
-            self.p95: float = post.metadata["p95"] # type: ignore
-
+            try:
+                self.p5: float = float(post.metadata["p5"])  # type: ignore
+                self.p50: float = float(post.metadata["p50"])  # type: ignore
+                self.p95: float = float(post.metadata["p95"])  # type: ignore
+            except (ValueError, TypeError) as e:
+                raise ValueError(
+                    f"LogNormal forecast: p5, p50, and p95 must be numbers. Got: p5={post.metadata.get('p5')}, p50={post.metadata.get('p50')}, p95={post.metadata.get('p95')}"
+                ) from e
         except KeyError:
             raise KeyError(
                 "Error: The lognormal forecast requires a 'p5', 'p50', and 'p95' metadata field.",
             )
-
-        if "outcome" in post.metadata: # type: ignore
-            self.outcome: float = post.metadata["outcome"] # type: ignore
-
+        if "outcome" in post.metadata:  # type: ignore
+            self.outcome: float = post.metadata["outcome"]  # type: ignore
 
     def calc(self) -> float:
         if hasattr(self, "outcome"):
             import forecast.models.math.lognormal as ln
+
             lognormal = ln.LogNormal(self.p5, self.p50, self.p95)
             outcome_probability: float = lognormal.pdf_to_probability(self.outcome)
             return self.brier_score(

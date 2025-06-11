@@ -1,6 +1,7 @@
 import math
 from typing import Optional
 
+
 class PERT:
     def __init__(self, xmin: float, mode: float, xmax: float):
         if not (xmin <= mode <= xmax):
@@ -21,7 +22,11 @@ class PERT:
         # Beta PDF on [0, 1]
         if x <= 0 or x >= 1:
             return 0.0
-        B = math.gamma(self.alpha) * math.gamma(self.beta) / math.gamma(self.alpha + self.beta)
+        B = (
+            math.gamma(self.alpha)
+            * math.gamma(self.beta)
+            / math.gamma(self.alpha + self.beta)
+        )
         return (x ** (self.alpha - 1)) * ((1 - x) ** (self.beta - 1)) / B
 
     def _beta_cdf(self, x: float) -> float:

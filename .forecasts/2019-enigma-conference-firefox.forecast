@@ -1,0 +1,13 @@
+---
+scenario: What is the likelihood that a “sec-critical” Firefox exploit will be discovered “in the wild” in February 2019?
+
+end_date: 2019-02-28
+type: choice
+options:
+    "Yes": .1813
+    "No": .8187
+outcome: "No"
+---
+
+
+https://magoo.medium.com/enigma-forecasting-follow-up-b3dddf00206

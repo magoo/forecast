@@ -1,6 +1,7 @@
 import math
 from typing import Optional
 
+
 class LogNormal:
     def __init__(self, p5: float, p50: float, p95: float):
         if p50 <= 0 or p95 <= 0:
@@ -19,7 +20,7 @@ class LogNormal:
 
         if p5 <= 0 or p5 >= p50:
             raise ValueError("p5 must be positive and less than p50")
-        
+
         log_p5 = math.log(p5)
         z5 = -1.64485
         # Fit using both tails
@@ -31,7 +32,7 @@ class LogNormal:
         if x <= 0:
             return 0.0
         coeff = 1 / (x * self.sigma * math.sqrt(2 * math.pi))
-        exponent = -((math.log(x) - self.mu) ** 2) / (2 * self.sigma ** 2)
+        exponent = -((math.log(x) - self.mu) ** 2) / (2 * self.sigma**2)
         return coeff * math.exp(exponent)
 
     def cdf(self, x: float) -> float:
@@ -50,7 +51,13 @@ class LogNormal:
     def _erf(x: float) -> float:
         sign = 1 if x >= 0 else -1
         x = abs(x)
-        a1, a2, a3, a4, a5 = 0.254829592, -0.284496736, 1.421413741, -1.453152027, 1.061405429
+        a1, a2, a3, a4, a5 = (
+            0.254829592,
+            -0.284496736,
+            1.421413741,
+            -1.453152027,
+            1.061405429,
+        )
         p = 0.3275911
         t = 1 / (1 + p * x)
         y = 1 - (((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t * math.exp(-x * x))

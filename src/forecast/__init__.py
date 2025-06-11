@@ -1,1 +1,1 @@
-from .forecast import entrypoint # type:ignore
+from .forecast import entrypoint  # type:ignore

@@ -1,5 +1,5 @@
 # pyre-strict
-from frontmatter import Post # type:ignore
+from frontmatter import Post  # type:ignore
 from forecast.models.forecast import Forecast
 
 
@@ -32,20 +32,24 @@ class Interval(Forecast):
         KeyError: If required 'min', 'max', or 'confidence' fields are missing from metadata
         ValueError: If calculating Brier score without an outcome
     """
+
     def __init__(self, post: Post) -> None:
         Forecast.__init__(self, post)
-
         try:
-            self.min: float = float(post.metadata["min"]) # type: ignore
-            self.max: float = float(post.metadata["max"]) # type: ignore
-            self.confidence: float = float(post.metadata["confidence"]) # type: ignore
+            try:
+                self.min: float = float(post.metadata["min"])  # type: ignore
+                self.max: float = float(post.metadata["max"])  # type: ignore
+                self.confidence: float = float(post.metadata["confidence"])  # type: ignore
+            except (ValueError, TypeError) as e:
+                raise ValueError(
+                    f"Interval forecast: min, max, and confidence must be numbers. Got: min={post.metadata.get('min')}, max={post.metadata.get('max')}, confidence={post.metadata.get('confidence')}"
+                ) from e
         except KeyError:
             raise KeyError(
                 "Error: The interval forecast requires a 'min', 'max', and 'confidence' metadata field."
             )
-
         if "outcome" in post.metadata:
-            self.outcome: float = post.metadata["outcome"] # type: ignore
+            self.outcome: float = post.metadata["outcome"]  # type: ignore
 
     def calc(self) -> float:
 
