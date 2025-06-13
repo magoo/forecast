@@ -6,9 +6,10 @@ type: choice
 options:
     "Yes. By end of July.": .03
     "Yes. By end of August.": .08
-    "Not before end of August. (Possibly Never)": .88
+    "Not before end of August. (Possibly Never)": .89
 outcome: "Not before end of August. (Possibly Never)"
 ---
 
+Fixed a rounding issue with panel forecasts, no longer have e6e data readily available. Brier score may be off a bit. 
 
 https://medium.com/starting-up-security/forecasting-a-headline-risk-netspectre-3c60338fd596

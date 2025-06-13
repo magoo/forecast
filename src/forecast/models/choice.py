@@ -37,6 +37,13 @@ class Choice(Forecast):
         except KeyError:
             raise KeyError("Error: Options not provided in post metadata.")
 
+        # Check that the sum of all option probabilities equals 1.0 (100%)
+        total_prob = sum(self.options.values())
+        if not abs(total_prob - 1.0) < 1e-8:
+            raise ValueError(
+                f"Sum of option probabilities must equal 1.0 (100%), but got {total_prob}."
+            )
+
         if "outcome" in post.metadata:
             self.outcome: str = post.metadata["outcome"]  # type: ignore
 
