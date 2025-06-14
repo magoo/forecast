@@ -2,6 +2,8 @@
 
 A command-line tool for tracking and scoring personal forecasts. Track your predictions over time and measure your forecasting accuracy using various probability distributions.
 
+![Example output](example.png)
+
 ## Installation
 
 
