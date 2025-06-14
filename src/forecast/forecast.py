@@ -145,7 +145,7 @@ def display_forecasts(forecasts: List[Forecast]) -> None:
 
     table.add_column("Status", justify="center", style="cyan", no_wrap=True)
     table.add_column("Days until close", justify="center", style="white")
-    table.add_column("Scenario", justify="center", style="white")
+    table.add_column("Scenario", justify="left", style="white")
     table.add_column("Brier Score", justify="center", style="white")
 
     for forecast in forecasts:

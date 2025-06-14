@@ -19,11 +19,11 @@ Then run the CLI
 forecast
 ```
 
-The first run will create a `.forecasts` directory. Take a look at [the examples](https://github.com/magoo/forecast/tree/main/.forecasts) to get started.
+The first run will ask to create a `.forecasts` directory, if one is not found. Take a look at [the examples](https://github.com/magoo/forecast/tree/main/.forecasts) to get started with `.forecast` files.
 
 ## Usage
 
-`forecast` will look for a `.forecasts` directory, then show and score all existing `.forecast` files within. If `.forecasts` directory does not exist, it will prompt for creation. Please note that the `.forecasts` directory is plural, and `.forecast` files are not. (I know, this could be better.)
+`forecast` will look for a `.forecasts` directory wherever it is ran, then show and score all existing `.forecast` files within. If `.forecasts` directory does not exist, it will prompt for creation. Please note that the `.forecasts` directory is plural, and `.forecast` files are not. 
 
 ```bash
 forecast
@@ -67,4 +67,4 @@ options:
 Some markdown text describing whether it will rain tomorrow.
 ```
 
-Examples are in the `.forecasts` directory in the repo.
+Examples for each type of forecast (`choice`, `interval`, `lognormal`, `pareto`, `pert`) are in the `.forecasts` directory in the repo.
